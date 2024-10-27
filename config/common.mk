@@ -41,7 +41,6 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.ota.allow_downgrade=true
 endif
-endif
 
 # Lineage-specific broadcast actions whitelist
 PRODUCT_COPY_FILES += \
