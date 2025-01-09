@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 PRODUCT_VERSION_MAJOR = 22
 PRODUCT_VERSION_MINOR = 1
-=======
 include vendor/f104a/version.mk
-
-PRODUCT_VERSION_MAJOR = 21
-PRODUCT_VERSION_MINOR = 0
->>>>>>> 7e6828a3 ([version]: include FloraOS version)
 
 ifeq ($(LINEAGE_VERSION_APPEND_TIME_OF_DAY),true)
     LINEAGE_BUILD_DATE := $(shell date -u +%Y%m%d_%H%M%S)
