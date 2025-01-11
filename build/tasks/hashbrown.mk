@@ -9,14 +9,12 @@ endif
 
 ifndef FLORAOS_KEYS_DIRECTORY
 $(error "Build would not be signed")
-else
-LINEAGE_BUILDTYPE := NIGHTLY
 endif
 
 ISOTIME=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 FLORAOS_TARGET_PACKAGE := $(OUT_DIR)/FloraOS-$(BUILD_NUMBER_FROM_FILE)-$(PRODUCT_DEVICE)-OTA.zip
 
-signed-target-files-package: target-files-package
+signed-target-files-package: target-files-package otatools
 	sign_target_files_apks -o -d $(FLORAOS_KEYS_DIRECTORY) \
          --extra_apks AdServicesApk.apk=$(FLORAOS_KEYS_DIRECTORY)/releasekey \
          --extra_apks FederatedCompute.apk=$(FLORAOS_KEYS_DIRECTORY)/releasekey \
