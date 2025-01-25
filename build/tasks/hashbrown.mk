@@ -11,8 +11,12 @@ ifndef FLORAOS_KEYS_DIRECTORY
 $(error "Build would not be signed")
 endif
 
+ifndef FLORAOS_BUILD_NUMBER
+$(error No FloraOS build number. This is the error in build system)
+endif
+
 ISOTIME=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
-FLORAOS_TARGET_PACKAGE := $(OUT_DIR)/FloraOS-$(BUILD_NUMBER_FROM_FILE)-$(PRODUCT_DEVICE)-OTA.zip
+FLORAOS_TARGET_PACKAGE := $(OUT_DIR)/FloraOS-$(FLORAOS_BUILD_NUMBER)-$(PRODUCT_DEVICE)-OTA.zip
 
 signed-target-files-package: target-files-package otatools
 	sign_target_files_apks -o -d $(FLORAOS_KEYS_DIRECTORY) \
@@ -159,4 +163,4 @@ signed-ota: signed-target-files-package
         $(FLORAOS_TARGET_PACKAGE)
 
 hashbrown: signed-ota otatools
-	curl -f -v -o $(OUT_DIR)/hashbrown_upload.txt --progress-bar -X "POST" "$(FLORAOS_API_URL)update/push/$(PRODUCT_DEVICE)/$(LINEAGE_BUILDTYPE)/$(BUILD_NUMBER_FROM_FILE)" -H "X-DroidAPI-Token: $(FLORAOS_TOKEN)" -F "file=@$(FLORAOS_TARGET_PACKAGE)" -F "base_version=21.0" -F "isotime=$(ISOTIME)"
+	curl -f -v -o $(OUT_DIR)/hashbrown_upload.txt --progress-bar -X "POST" "$(FLORAOS_API_URL)update/push/$(PRODUCT_DEVICE)/$(LINEAGE_BUILDTYPE)/$(FLORAOS_BUILD_NUMBER)" -H "X-DroidAPI-Token: $(FLORAOS_TOKEN)" -F "file=@$(FLORAOS_TARGET_PACKAGE)" -F "base_version=22.1" -F "isotime=$(ISOTIME)"
