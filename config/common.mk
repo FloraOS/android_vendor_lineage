@@ -225,7 +225,8 @@ PRODUCT_PACKAGE_OVERLAYS += \
 
 PRODUCT_PACKAGES += \
     DocumentsUIOverlay \
-    NetworkStackOverlay
+    NetworkStackOverlay \
+    PermissionControllerOverlay
 
 # Translations
 CUSTOM_LOCALES += \
